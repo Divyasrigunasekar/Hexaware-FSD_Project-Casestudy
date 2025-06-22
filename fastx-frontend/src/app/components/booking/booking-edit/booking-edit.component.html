@@ -1,0 +1,68 @@
+<div class="container mt-4">
+  <h2>Edit Booking</h2>
+
+  <form #bookingForm="ngForm" (ngSubmit)="updateBooking(bookingForm)" novalidate>
+    
+    <div class="mb-3">
+  <label>User ID</label>
+  <input
+    type="number"
+    class="form-control"
+    name="userId"
+    [(ngModel)]="booking.userId"
+    required
+    #userId="ngModel"
+  >
+  <div *ngIf="userId.invalid && userId.touched" class="text-danger">
+    User ID is required.
+  </div>
+</div>
+
+
+    <!-- Route ID -->
+    <div class="mb-3">
+      <label>Route ID</label>
+      <input type="number" class="form-control" name="routeId"
+             [(ngModel)]="booking.routeId"
+             (ngModelChange)="onRouteIdChange()"
+             required #routeId="ngModel">
+      <div *ngIf="routeId.invalid && routeId.touched" class="text-danger">
+        Route ID is required.
+      </div>
+    </div>
+
+    <!-- Fare Per Seat -->
+    <div class="mb-3" *ngIf="farePerSeat > 0">
+      <strong>Fare per seat:</strong> ₹{{ farePerSeat }}
+    </div>
+
+    <!-- Select Seats -->
+    <div class="mb-3">
+      <label>Select Seats:</label><br>
+      <div *ngFor="let seat of allSeatNumbers" class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox"
+               [value]="seat"
+               [checked]="isSeatSelected(seat)"
+               (change)="onSeatToggle(seat, getChecked($event))"
+               id="seat-{{seat}}">
+        <label class="form-check-label" for="seat-{{seat}}">{{ seat }}</label>
+      </div>
+      <div *ngIf="seatError" class="text-danger mt-1">Select at least one seat.</div>
+    </div>
+
+    <!-- Summary -->
+    <div class="mb-3">
+      <strong>Seats Booked:</strong> {{ booking.seatsBooked }}
+    </div>
+
+    <div class="mb-3">
+      <strong>Total Amount:</strong> ₹{{ booking.totalAmount }}
+    </div>
+
+    <!-- Submit & Cancel -->
+    <button class="btn btn-success" type="submit" [disabled]="bookingForm.invalid || seatError">
+      Update Booking
+    </button>
+    <a routerLink="/booking-list" class="btn btn-secondary ms-2">Cancel</a>
+  </form>
+</div>

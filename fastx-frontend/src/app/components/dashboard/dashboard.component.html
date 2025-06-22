@@ -1,0 +1,35 @@
+<div class="container mt-4">
+  <h2 class="text-center mb-4">Welcome to FastX Dashboard</h2>
+
+  <!-- Admin Dashboard -->
+  <div *ngIf="role === 'ADMIN'">
+    <h4>Admin Panel</h4>
+    <ul>
+      <li><a routerLink="/users">Manage Users</a></li>
+      <li><a routerLink="/buses">Manage Buses</a></li>
+      <li><a routerLink="/routes">Manage Routes</a></li>
+      <li><a routerLink="/seats">Manage Seats</a></li>
+      <li><a routerLink="/bookings">View Bookings</a></li>
+    </ul>
+  </div>
+
+  <!-- Operator Dashboard -->
+  <div *ngIf="role === 'OPERATOR'">
+    <h4>Bus Operator Panel</h4>
+    <ul>
+      <li><a routerLink="/buses">Manage Your Buses</a></li>
+      <li><a routerLink="/routes">Assign Routes</a></li>
+      <li><a routerLink="/seats">Update Seat Status</a></li>
+    </ul>
+  </div>
+
+  <!-- User Dashboard -->
+  <div *ngIf="role === 'USER'">
+    <h4>User Panel</h4>
+    <ul>
+      <li><a routerLink="/search-routes">Search Routes</a></li>
+      <li><a routerLink="/bookings">My Bookings</a></li>
+      <li><a routerLink="/profile">My Profile</a></li>
+    </ul>
+  </div>
+</div>

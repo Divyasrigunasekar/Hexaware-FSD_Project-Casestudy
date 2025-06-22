@@ -1,0 +1,54 @@
+<div class="container mt-4">
+  <h3>Seat List</h3>
+  <button class="btn btn-primary mb-3" routerLink="/seat-add">Add Seat</button>
+
+  <!-- Live Search Box -->
+  <div class="mb-3">
+    <div class="col-md-6 mb-6">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Search by seat number, bus ID, route ID or status"
+      [(ngModel)]="searchTerm"
+      (input)="filterSeats()"
+    />
+    </div>
+  </div>
+
+  <button class="btn btn-secondary mb-3" (click)="clearSearch()" *ngIf="searchTerm">Clear</button>
+
+  <!-- Seat Table -->
+  <table class="table table-hover table-bordered text-center align-middle" *ngIf="filteredSeats.length > 0; else noSeats">
+    <thead class="table-dark">
+      <tr>
+        <th>Seat ID</th>
+        <th>Route ID</th>
+        <th>Bus ID</th>
+        <th>Seat Number</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let seat of filteredSeats">
+        <td>{{ seat.seatId }}</td>
+        <td>{{ seat.routeId }}</td>
+        <td>{{ seat.busId }}</td>
+        <td>{{ seat.seatNumber }}</td>
+        <td>
+          <span class="status-badge" [ngClass]="seat.isBooked ? 'booked-badge' : 'available-badge'">
+            {{ seat.isBooked ? 'Booked' : 'Available' }}
+          </span>
+        </td>
+        <td>
+          <button class="btn btn-sm btn-warning me-1" (click)="editSeat(seat.seatId!)">Edit</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteSeat(seat.seatId!)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #noSeats>
+    <div class="alert alert-info">No seats found.</div>
+  </ng-template>
+</div>

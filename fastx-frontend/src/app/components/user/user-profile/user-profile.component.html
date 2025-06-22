@@ -1,0 +1,37 @@
+<div class="container mt-5 d-flex justify-content-center">
+  <div *ngIf="user; else loading" class="card shadow p-4 border-0 rounded-4" style="max-width: 600px; width: 100%;">
+    <!-- Avatar & Name -->
+    <div class="d-flex align-items-center mb-3">
+      <div
+        class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-3"
+        style="width: 60px; height: 60px; font-size: 24px; font-weight: bold;">
+        {{ user.name.charAt(0) | uppercase }}
+      </div>
+      <div>
+        <h4 class="mb-0">{{ user.name }}</h4>
+        <small class="text-muted">{{ user.email }}</small>
+      </div>
+    </div>
+
+    <!-- User Info -->
+    <ul class="list-group list-group-flush mb-3">
+      <li class="list-group-item px-0 py-2"><strong>User ID:</strong> {{ user.userId }}</li>
+      <li class="list-group-item px-0 py-2"><strong>Gender:</strong> {{ user.gender }}</li>
+      <li class="list-group-item px-0 py-2"><strong>Contact:</strong> {{ user.contactNumber }}</li>
+      <li class="list-group-item px-0 py-2"><strong>Role:</strong> {{ user.role }}</li>
+    </ul>
+
+    <!-- Edit Button -->
+    <div class="text-end">
+      <button class="btn btn-warning px-4" (click)="goToEdit()">Edit Profile</button>
+    </div>
+  </div>
+
+  <!-- Loading Template -->
+  <ng-template #loading>
+    <div class="text-center mt-4">
+      <div class="spinner-border text-primary" style="width: 2.5rem; height: 2.5rem;"></div>
+      <p class="mt-2">Loading user profile...</p>
+    </div>
+  </ng-template>
+</div>

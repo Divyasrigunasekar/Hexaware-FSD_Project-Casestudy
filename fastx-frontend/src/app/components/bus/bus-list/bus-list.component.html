@@ -1,0 +1,51 @@
+<div class="container mt-4">
+  <h3 class="mb-3">Bus List</h3>
+
+  <!-- Unified Live Search -->
+  <div class="mb-3">
+    <div class="col-md-6 mb-6">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Search by name, number, type, seats, amenities"
+      [(ngModel)]="searchTerm"
+      (input)="filterBuses()"
+    />
+    </div>
+  </div>
+
+  <button class="btn btn-secondary mb-3" (click)="clearSearch()" *ngIf="searchTerm">Clear</button>
+
+  <!-- Bus Table -->
+  <table class="table table-bordered table-striped" *ngIf="filteredBuses.length > 0; else noBuses">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Number</th>
+        <th>Type</th>
+        <th>Total Seats</th>
+        <th>Amenities</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let bus of filteredBuses">
+        <td>{{ bus.busId }}</td>
+        <td>{{ bus.busName }}</td>
+        <td>{{ bus.busNumber }}</td>
+        <td>{{ bus.busType }}</td>
+        <td>{{ bus.totalSeats }}</td>
+        <td>{{ bus.amenities }}</td>
+        <td>
+          <button class="btn btn-sm btn-primary me-2" (click)="editBus(bus.busId!)">Edit</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteBus(bus.busId!)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #noBuses>
+    <div class="alert alert-info">No buses match your search.</div>
+  </ng-template>
+</div>

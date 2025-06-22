@@ -1,0 +1,81 @@
+<div class="container mt-4">
+  <h3 class="text-success">Edit Payment</h3>
+
+  <form #paymentForm="ngForm" (ngSubmit)="onUpdate(paymentForm)" class="mt-3">
+
+    <div class="mb-3">
+      <label for="bookingId" class="form-label">Booking ID</label>
+      <input
+        type="number"
+        id="bookingId"
+        name="bookingId"
+        class="form-control"
+        [(ngModel)]="payment.bookingId"
+        #bookingId="ngModel"
+        required
+        min="1"
+      />
+      <div *ngIf="(bookingId.invalid && bookingId.touched)" class="text-danger">
+        Booking ID is required and must be a positive number.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="paymentMethod" class="form-label">Payment Method</label>
+      <select
+        id="paymentMethod"
+        name="paymentMethod"
+        class="form-control"
+        [(ngModel)]="payment.paymentMethod"
+        #paymentMethod="ngModel"
+        required
+      >
+        <option value="">-- Select Method --</option>
+        <option value="UPI">UPI</option>
+        <option value="CARD">Card</option>
+        <option value="NET_BANKING">Net Banking</option>
+        <option value="WALLET">Wallet</option>
+      </select>
+      <div *ngIf="paymentMethod.invalid && paymentMethod.touched" class="text-danger">
+        Payment method is required.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="paymentTime" class="form-label">Payment Time</label>
+      <input
+        type="datetime-local"
+        id="paymentTime"
+        name="paymentTime"
+        class="form-control"
+        [(ngModel)]="payment.paymentTime"
+        #paymentTime="ngModel"
+        required
+      />
+      <div *ngIf="paymentTime.invalid && paymentTime.touched" class="text-danger">
+        Payment time is required.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="paymentStatus" class="form-label">Payment Status</label>
+      <input
+        type="text"
+        id="paymentStatus"
+        name="paymentStatus"
+        class="form-control"
+        [(ngModel)]="payment.paymentStatus"
+        #paymentStatus="ngModel"
+        required
+      />
+      <div *ngIf="paymentStatus.invalid && paymentStatus.touched" class="text-danger">
+        Status is required.
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="paymentForm.invalid">
+      Update Payment
+    </button>
+    <button type="button" class="btn btn-secondary ms-2" (click)="cancel()">Cancel</button>
+  </form>
+</div>

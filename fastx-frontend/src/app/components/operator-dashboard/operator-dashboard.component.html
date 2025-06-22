@@ -1,0 +1,72 @@
+<div class="container mt-5">
+
+  <!-- Toggle Profile Button -->
+  <div class="text-end mb-3">
+    <button class="btn btn-outline-primary" (click)="toggleProfile()">
+      {{ showProfile ? 'Hide' : 'Show' }} My Profile
+    </button>
+  </div>
+
+  <!-- Show Profile Component Conditionally -->
+  <div *ngIf="showProfile">
+    <app-user-profile></app-user-profile>
+  </div>
+
+  <!-- Welcome Message -->
+  <h2 class="welcome-title text-center mb-4">
+    👋 Hello, <span class="text-primary">{{ operatorName }}</span>! Welcome to your Operator Dashboard 🛠️
+  </h2>
+
+  <div class="row mt-4 justify-content-center">
+
+    <!-- BUS MANAGEMENT -->
+    <div class="col-md-4">
+      <div class="card text-white bg-primary mb-4 shadow">
+        <div class="card-header fw-bold">🚌 Bus Management</div>
+        <div class="card-body">
+          <p class="card-text">Add, update, or remove buses you are the Operator right?🫡</p>
+          <a routerLink="/bus-list" class="btn btn-outline-light me-2">Manage Buses</a>
+          <a routerLink="/bus-add" class="btn btn-light text-primary fw-bold">Add Bus</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROUTE MANAGEMENT -->
+    <div class="col-md-4">
+      <div class="card text-white bg-success mb-4 shadow">
+        <div class="card-header fw-bold">🗺️ Route Management</div>
+        <div class="card-body">
+          <p class="card-text">Keep your routes clear and passengers on track! 🧭</p>
+          <a routerLink="/route-list" class="btn btn-outline-light me-2">Manage Routes</a>
+          <a routerLink="/route-add" class="btn btn-light text-success fw-bold">Add Route</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEAT MANAGEMENT -->
+    <div class="col-md-4">
+      <div class="card text-dark bg-warning mb-4 shadow">
+        <div class="card-header fw-bold">💺 Seat Management</div>
+        <div class="card-body">
+          <p class="card-text">Control seat availability like a pro! We know you will🎯</p>
+          <a routerLink="/seat-list" class="btn btn-outline-dark me-2">Manage Seats</a>
+          <a routerLink="/seat-add" class="btn btn-dark fw-bold">Add Seat</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW BOOKINGS -->
+    <div class="col-md-4">
+      <div class="card text-white bg-secondary mb-4 shadow">
+        <div class="card-header fw-bold">📖 View Bookings</div>
+        <div class="card-body">
+          <p class="card-text">Check bookings for your managed routes. ✅</p>
+          <a routerLink="/booking-list" class="btn btn-outline-light fw-bold">View Bookings</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+    
+</div>

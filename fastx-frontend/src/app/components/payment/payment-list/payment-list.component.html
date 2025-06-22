@@ -1,0 +1,47 @@
+<div class="container mt-4">
+  <h3 >Payment List</h3>
+
+  <!-- Live Search Box -->
+  <div class="mb-3">
+     <div class="col-md-6 mb-2">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Search by ID, Booking ID, Method, Status or Amount"
+      [(ngModel)]="searchTerm"
+      (input)="filterPayments()" />
+      </div>
+  </div>
+
+  <div *ngIf="filteredPayments.length === 0" class="alert alert-info">
+    No payments found.
+  </div>
+
+  <table *ngIf="filteredPayments.length > 0" class="table table-bordered table-striped mt-3">
+    <thead class="table-dark text-center">
+      <tr>
+        <th>Payment ID</th>
+        <th>Booking ID</th>
+        <th>Amount</th>
+        <th>Method</th>
+        <th>Status</th>
+        <th>Time</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody class="text-center">
+      <tr *ngFor="let payment of filteredPayments">
+        <td>{{ payment.paymentId }}</td>
+        <td>{{ payment.bookingId }}</td>
+        <td>{{ payment.amount | currency:'INR':'symbol' }}</td>
+        <td>{{ payment.paymentMethod }}</td>
+        <td>{{ payment.paymentStatus }}</td>
+        <td>{{ payment.paymentTime ? (payment.paymentTime | date:'short') : 'N/A' }}</td>
+        <td>
+          <button class="btn btn-sm btn-warning me-2" (click)="editPayment(payment.paymentId)">Edit</button>
+          <button class="btn btn-sm btn-danger" (click)="deletePayment(payment.paymentId)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,50 @@
+<div class="container mt-4">
+  <h3 class="text-primary">💳 Add Payment</h3>
+
+  <form #paymentForm="ngForm" (ngSubmit)="onSubmit(paymentForm)" novalidate>
+
+    <!-- Booking ID -->
+    <div class="form-group mb-3">
+      <label for="bookingId">📘 Booking ID</label>
+      <input type="number" class="form-control" id="bookingId" name="bookingId"
+             [(ngModel)]="payment.bookingId" required min="1"
+             #bookingId="ngModel" />
+      <div *ngIf="bookingId.invalid && bookingId.touched" class="text-danger">
+        Booking ID is required and must be a positive number.
+      </div>
+    </div>
+
+    <!-- Payment Method -->
+    <div class="form-group mb-3">
+      <label for="paymentMethod">💰 Payment Method</label>
+      <select class="form-control" id="paymentMethod" name="paymentMethod"
+              [(ngModel)]="payment.paymentMethod" required
+              #paymentMethod="ngModel">
+        <option value="" disabled selected>Select method</option>
+        <option value="UPI">UPI</option>
+        <option value="CARD">Card</option>
+        <option value="NET_BANKING">Net Banking</option>
+        <option value="WALLET">Wallet</option>
+      </select>
+      <div *ngIf="paymentMethod.invalid && paymentMethod.touched" class="text-danger">
+        Payment Method is required.
+      </div>
+    </div>
+
+    <!-- Payment Time -->
+    <div class="form-group mb-3">
+      <label for="paymentTime">🕒 Payment Time</label>
+      <input type="datetime-local" class="form-control" id="paymentTime" name="paymentTime"
+             [(ngModel)]="payment.paymentTime" required
+             #paymentTime="ngModel" />
+      <div *ngIf="paymentTime.invalid && paymentTime.touched" class="text-danger">
+        Payment Time is required.
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-success" [disabled]="paymentForm.invalid">
+      ✅ Submit Payment
+    </button>
+  </form>
+</div>

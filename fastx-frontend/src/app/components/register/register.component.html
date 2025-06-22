@@ -1,0 +1,74 @@
+<div class="container mt-5" style="max-width: 600px;">
+  <h2 class="text-center text-primary mb-4">🚀 Register with FastX</h2>
+
+  <form #registerForm="ngForm" (ngSubmit)="onRegister(registerForm)" class="border p-4 rounded shadow">
+<!-- Name -->
+<div class="form-floating mb-3">
+  <input type="text" id="name" name="name" class="form-control"
+         placeholder="Full Name" [(ngModel)]="user.name"
+         required minlength="4" />
+  <label for="name">Full Name</label>
+
+  <!-- Validation Errors -->
+  <div *ngIf="registerForm.submitted && (!user.name || user.name.length < 4)" class="text-danger mt-1">
+    Name must be at least 4 characters
+  </div>
+</div>
+
+
+    <!-- Email -->
+    <div class="form-floating mb-3">
+      <input type="email" id="email" name="email" class="form-control" placeholder="Email"
+        [(ngModel)]="user.email" required email />
+      <label for="email">Email</label>
+      <div *ngIf="registerForm.submitted && !user.email" class="text-danger mt-1">Valid email is required</div>
+    </div>
+
+    <!-- Password -->
+    <div class="form-floating mb-3">
+      <input type="password" id="password" name="password" class="form-control" placeholder="Password"
+        [(ngModel)]="user.password" required minlength="6" />
+      <label for="password">Password</label>
+      <div *ngIf="registerForm.submitted && user.password.length < 6" class="text-danger mt-1">
+        Password must be at least 6 characters
+      </div>
+    </div>
+
+    <!-- Contact Number -->
+    <div class="form-floating mb-3">
+      <input type="text" id="contact" name="contactNumber" class="form-control" placeholder="Contact Number"
+        [(ngModel)]="user.contactNumber" required />
+      <label for="contact">Contact Number</label>
+      <div *ngIf="registerForm.submitted && !isValidContactNumber(user.contactNumber)" class="text-danger mt-1">
+        Enter a valid 10-digit contact number
+      </div>
+    </div>
+
+    <!-- Gender -->
+    <div class="form-floating mb-3">
+      <select id="gender" name="gender" class="form-select" [(ngModel)]="user.gender" required>
+        <option value="" disabled selected>-- Select Gender --</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+      <label for="gender">Gender</label>
+      <div *ngIf="registerForm.submitted && !user.gender" class="text-danger mt-1">Gender is required</div>
+    </div>
+
+    <!-- Role -->
+    <div class="form-floating mb-4">
+      <select id="role" name="role" class="form-select" [(ngModel)]="user.role" required>
+        <option value="" disabled selected>-- Select Role --</option>
+        <option value="USER">USER</option>
+        <option value="OPERATOR">OPERATOR</option>
+        <option value="ADMIN">ADMIN</option>
+      </select>
+      <label for="role">Role</label>
+      <div *ngIf="registerForm.submitted && !user.role" class="text-danger mt-1">Role is required</div>
+    </div>
+
+    <button type="submit" class="btn btn-success w-100 py-2">
+      Register
+    </button>
+  </form>
+</div>

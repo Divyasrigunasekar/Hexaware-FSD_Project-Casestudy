@@ -1,0 +1,103 @@
+<div class="container mt-5">
+
+  <!-- Toggle Profile Button -->
+  <div class="text-end mb-3">
+    <button class="btn btn-outline-primary" (click)="toggleProfile()">
+      {{ showProfile ? 'Hide' : 'Show' }} My Profile
+    </button>
+  </div>
+
+  <!-- Show Profile Component Conditionally -->
+  <div *ngIf="showProfile">
+    <app-user-profile></app-user-profile>
+  </div>
+
+  <!-- Pleasant Welcome -->
+  <h2 class="welcome-title text-center mb-4">
+    👋 Hello, <span class="text-success">{{ adminName }}</span>! Welcome to your Admin Dashboard 🌟
+  </h2>
+
+  <div class="row mt-4 justify-content-center">
+
+    <!-- BUS MANAGEMENT -->
+    <div class="col-md-4">
+      <div class="card text-white bg-info mb-4 shadow">
+        <div class="card-header fw-bold">🚌 Bus Management</div>
+        <div class="card-body">
+          <p class="card-text">Add more buses before passengers start walking! 🏃‍♂️</p>
+          <a routerLink="/bus-list" class="btn btn-outline-light me-2">Manage Buses</a>
+          <a routerLink="/bus-add" class="btn btn-light text-info fw-bold">Add Bus</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROUTE MANAGEMENT -->
+    <div class="col-md-4">
+      <div class="card text-white bg-success mb-4 shadow">
+        <div class="card-header fw-bold">🗺️ Route Management</div>
+        <div class="card-body">
+          <p class="card-text">Add new routes so no one gets lost again! 🧭</p>
+          <a routerLink="/route-list" class="btn btn-outline-light me-2">Manage Routes</a>
+          <a routerLink="/route-add" class="btn btn-light text-success fw-bold">Add Route</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEAT MANAGEMENT -->
+    <div class="col-md-4">
+      <div class="card text-white bg-secondary mb-4 shadow">
+        <div class="card-header fw-bold">💺 Seat Management</div>
+        <div class="card-body">
+          <p class="card-text">Don’t let passengers stand — assign seats like a boss! 😎</p>
+          <a routerLink="/seat-list" class="btn btn-outline-light me-2">Manage Seats</a>
+          <a routerLink="/seat-add" class="btn btn-light text-secondary fw-bold">Add Seat</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOOKINGS -->
+    <div class="col-md-4">
+      <div class="card text-dark bg-warning mb-4 shadow">
+        <div class="card-header fw-bold">📖 Booking Management</div>
+        <div class="card-body">
+          <p class="card-text">Every seat booked means one less fight! 👊</p>
+          <a routerLink="/booking-list" class="btn btn-outline-dark fw-bold">Manage Bookings</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAYMENTS -->
+    <div class="col-md-4">
+      <div class="card text-white bg-dark mb-4 shadow">
+        <div class="card-header fw-bold">💰 Payment Management</div>
+        <div class="card-body">
+          <p class="card-text">Let’s make sure the coins roll in on time! 💸</p>
+          <a routerLink="/payment-list" class="btn btn-outline-light fw-bold">Manage Payments</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- USER MANAGEMENT -->
+    <div class="col-md-4">
+      <div class="card text-white bg-danger mb-4 shadow">
+        <div class="card-header fw-bold">👥 User Management</div>
+        <div class="card-body">
+          <p class="card-text">Keep your users happy and your system happier! 😊</p>
+          <a routerLink="/users/list" class="btn btn-outline-light fw-bold">Manage Users</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- CANCELLATIONS -->
+<div class="col-md-4">
+  <div class="card text-white bg-primary mb-4 shadow">
+    <div class="card-header fw-bold">❌ Cancellation Management</div>
+    <div class="card-body">
+      <p class="card-text">Track and manage all booking cancellations.</p>
+      <a routerLink="/cancellations" class="btn btn-outline-light fw-bold">Manage Cancellations</a>
+    </div>
+  </div>
+</div>
+
+  </div>
+</div>
