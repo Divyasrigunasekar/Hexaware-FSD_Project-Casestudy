@@ -1,0 +1,131 @@
+<div class="container mt-5">
+
+  <!-- Toggle Profile Button -->
+  <div class="text-end mb-3">
+    <button class="btn btn-outline-primary" (click)="toggleProfile()">
+      {{ showProfile ? 'Hide' : 'Show' }} My Profile
+    </button>
+  </div>
+
+  <!-- Show Profile Component Conditionally -->
+  <div *ngIf="showProfile">
+    <app-user-profile></app-user-profile>
+  </div>
+
+  <!-- Fun Welcome Message -->
+  <h2 class="welcome-title mb-4">
+    🙋‍♀️ Hi {{ userName }}! Welcome back to FastX 🚍 — Let's plan your next ride!
+  </h2>
+
+  <!-- Dashboard Cards -->
+  <div class="row mt-4 justify-content-center">
+
+    <!-- View Buses -->
+    <div class="col-md-4">
+      <div class="card bg-primary text-white mb-4 shadow">
+        <div class="card-header fw-bold">🚌 Buses</div>
+        <div class="card-body">
+          <p class="card-text">Explore available buses anytime.</p>
+          <a routerLink="/bus-list" class="btn btn-light">View Buses</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- View Routes -->
+    <div class="col-md-4">
+      <div class="card bg-info text-white mb-4 shadow">
+        <div class="card-header fw-bold">🗺️ Routes</div>
+        <div class="card-body">
+          <p class="card-text">Check where we’re headed next!</p>
+          <a routerLink="/route-list" class="btn btn-light">View Routes</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- View Seats -->
+    <div class="col-md-4">
+      <div class="card bg-secondary text-white mb-4 shadow">
+        <div class="card-header fw-bold">💺 Seats</div>
+        <div class="card-body">
+          <p class="card-text">Check seat availability per bus.</p>
+          <a routerLink="/seat-list" class="btn btn-light">View Seats</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Book Tickets -->
+    <div class="col-md-4">
+      <div class="card bg-success text-white mb-4 shadow">
+        <div class="card-header fw-bold">🎫 Book Tickets</div>
+        <div class="card-body">
+          <p class="card-text">Secure your seat before it's gone!</p>
+          <a routerLink="/booking-add" class="btn btn-light">Book Now</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- My Bookings -->
+    <div class="col-md-4">
+      <div class="card bg-warning text-dark mb-4 shadow">
+        <div class="card-header fw-bold">📖 My Bookings</div>
+        <div class="card-body">
+          <p class="card-text">Review your booking history easily.</p>
+          <a routerLink="/booking-list" class="btn btn-dark">My Bookings</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Payments -->
+    <div class="col-md-4">
+      <div class="card bg-dark text-white mb-4 shadow">
+        <div class="card-header fw-bold">💰 Payments</div>
+        <div class="card-body">
+          <p class="card-text">Complete payments securely and fast.</p>
+          <a routerLink="/payment-add" class="btn btn-light">Make Payment</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Payment Records Table -->
+  <h3 class="text-center mt-5">🧾 Your Payment History</h3>
+  <div class="payment-table mt-3" *ngIf="payments.length > 0; else noPayments">
+    <table class="table table-striped table-bordered">
+      <thead class="table-dark">
+        <tr>
+          <th>Payment ID</th>
+          <th>Amount</th>
+          <th>Status</th>
+          <th>Payment Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let payment of payments">
+          <td>{{ payment.paymentId }}</td>
+          <td>{{ payment.amount | currency:'INR':'symbol' }}</td>
+          <td>{{ payment.paymentStatus }}</td>
+          <td>{{ payment.paymentTime | date:'short' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Cancellations -->
+<div class="col-md-4">
+  <div class="card bg-danger text-white mb-4 shadow">
+    <div class="card-header fw-bold">❌ Cancellations</div>
+    <div class="card-body">
+      <p class="card-text">Review or cancel past bookings.</p>
+      <a routerLink="/cancellations" class="btn btn-light">View Cancellations</a>
+    </div>
+  </div>
+</div>
+
+  <ng-template #noPayments>
+    <p class="text-muted mt-3 text-center">No payments found. 💤</p>
+  </ng-template>
+
+  
+
+</div>

@@ -1,0 +1,33 @@
+<div class="container mt-4">
+  <h2 *ngIf="isAdmin">All Cancellations</h2>
+  <h2 *ngIf="!isAdmin">My Cancellations</h2>
+
+  <table class="table table-bordered table-hover mt-3">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Booking ID</th>
+        <th>Payment ID</th>
+        <th>User ID</th>
+        <th>Seat IDs</th>
+        <th>Reason</th>
+        <th>Cancelled At</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let c of cancellations">
+        <td>{{ c.cancellationId }}</td>
+        <td>{{ c.bookingId }}</td>
+        <td>{{ c.paymentId }}</td>
+        <td>{{ c.userId }}</td>
+        <td>{{ c.seatIds }}</td>
+        <td>{{ c.reason }}</td>
+        <td>{{ c.cancelledAt | date:'short' }}</td>
+        <td>
+          <button class="btn btn-sm btn-danger" (click)="delete(c.cancellationId!)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

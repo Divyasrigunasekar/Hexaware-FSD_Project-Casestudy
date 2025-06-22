@@ -1,0 +1,111 @@
+<div class="container mt-4">
+  <div class="card shadow-lg">
+    <div class="card-header bg-primary text-white">
+      <h4 class="mb-0">🎟️ Book Your Seat</h4>
+    </div>
+
+    <div class="card-body">
+      <form #bookingForm="ngForm" (ngSubmit)="addBooking(bookingForm)" novalidate>
+
+        <!-- User ID (readonly) -->
+        <div class="mb-3">
+          <label for="userId" class="form-label">👤 User ID</label>
+          <input type="number" id="userId" class="form-control bg-light" name="userId"
+                 [(ngModel)]="booking.userId" readonly>
+        </div>
+
+        <!-- Route Dropdown -->
+<div class="mb-3">
+  <label for="routeId" class="form-label">🛣️ Select Route <span class="text-danger">*</span></label>
+  <select
+    id="routeId"
+    class="form-select"
+    name="routeId"
+    [(ngModel)]="booking.routeId"
+    (change)="onRouteIdChange()"
+    required
+    #routeId="ngModel"
+  >
+    <option value="" disabled selected>🔽 Choose a route</option>
+    <option *ngFor="let r of routes" [value]="r.routeId">
+      {{ r.origin }} → {{ r.destination }} | 🕒 {{ r.departureTime | date: 'short' }}
+    </option>
+  </select>
+  <div *ngIf="routeId.invalid && routeId.touched" class="text-danger">
+    Route is required.
+  </div>
+</div>
+
+
+        <!-- Fare Info -->
+        <div *ngIf="farePerSeat > 0" class="mb-3">
+          <strong>💰 Fare per seat:</strong> ₹{{ farePerSeat }}
+        </div>
+
+
+   <!-- 🚌 Pleasing Bus Seat Layout (Smaller Seats + Error Message) -->
+<div class="mb-3">
+  <label class="form-label fw-bold">🪑 Select Your Seats</label>
+
+  <div class="bus-layout d-flex justify-content-center gap-5">
+    <!-- Left Side -->
+    <div class="seat-side d-flex flex-wrap gap-2 justify-content-end">
+      <div *ngFor="let seat of seatList.slice(0, seatList.length / 2)"
+           class="seat-icon-wrapper"
+           [class.selected]="booking.seatNumbers.includes(seat.seatNumber)"
+           [class.booked]="seat.isBooked"
+           (click)="toggleSeat(seat.seatNumber, seat.isBooked)">
+        <svg class="seat-svg" viewBox="0 0 24 24">
+          <rect x="4" y="2" width="16" height="14" rx="3" ry="3"/>
+          <rect x="6" y="16" width="12" height="4" rx="2" ry="2"/>
+        </svg>
+        <div class="seat-number">{{ seat.seatNumber }}</div>
+      </div>
+    </div>
+
+    <!-- Aisle Space -->
+    <div class="aisle-space" style="width: 40px;"></div>
+
+    <!-- Right Side -->
+    <div class="seat-side d-flex flex-wrap gap-2 justify-content-start">
+      <div *ngFor="let seat of seatList.slice(seatList.length / 2)"
+           class="seat-icon-wrapper"
+           [class.selected]="booking.seatNumbers.includes(seat.seatNumber)"
+           [class.booked]="seat.isBooked"
+           (click)="toggleSeat(seat.seatNumber, seat.isBooked)">
+        <svg class="seat-svg" viewBox="0 0 24 24">
+          <rect x="4" y="2" width="16" height="14" rx="3" ry="3"/>
+          <rect x="6" y="16" width="12" height="4" rx="2" ry="2"/>
+        </svg>
+        <div class="seat-number">{{ seat.seatNumber }}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⚠️ Seat Selection Error -->
+  <div *ngIf="seatError" class="text-danger mt-2">
+    ⚠️ Please select at least one seat.
+  </div>
+</div>
+
+ <!-- Summary -->
+        <div class="mb-3">
+          <strong>✅ Seats Booked:</strong> {{ booking.seatsBooked }}
+        </div>
+        <div class="mb-3">
+          <strong>💳 Total Amount:</strong> ₹{{ booking.totalAmount }}
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="d-flex justify-content-start align-items-center">
+          <button class="btn btn-success" type="submit"
+                  [disabled]="bookingForm.invalid || seatError">
+            ✅ Confirm Booking
+          </button>
+          <a routerLink="/booking-list" class="btn btn-secondary ms-2">❌ Cancel</a>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

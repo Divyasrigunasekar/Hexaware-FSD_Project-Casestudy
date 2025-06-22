@@ -1,0 +1,23 @@
+.status-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 15px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Custom Booked color (light rose with red text) */
+.booked-badge {
+  background-color: #fcebea;
+  color: #b02a37;
+  border: 1px solid #f5c2c7;
+}
+
+/* Custom Available color (soft teal) */
+.available-badge {
+  background-color: #e8f8f5;
+  color: #117a65;
+  border: 1px solid #d1f2eb;
+}

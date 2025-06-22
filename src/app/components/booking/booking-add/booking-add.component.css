@@ -1,0 +1,31 @@
+.seat-icon-wrapper {
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.seat-icon-wrapper:hover {
+  transform: scale(1.05);
+}
+
+.seat-svg {
+  width: 30px; /* smaller size */
+  height: 30px;
+  fill: #cfd8dc;
+  transition: fill 0.3s;
+}
+
+.seat-icon-wrapper.selected .seat-svg {
+  fill: #4caf50; /* green */
+}
+
+.seat-icon-wrapper.booked .seat-svg {
+  fill: #e53935; /* red */
+  cursor: not-allowed;
+}
+
+.seat-number {
+  font-size: 11px;
+  color: #555;
+  margin-top: 2px;
+}

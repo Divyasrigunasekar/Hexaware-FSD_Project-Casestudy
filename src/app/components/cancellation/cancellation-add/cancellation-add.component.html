@@ -1,0 +1,80 @@
+<div class="container mt-4">
+  <h2>🚫 Cancel Booking</h2>
+
+  <!-- Success and Error Alerts -->
+  <div *ngIf="successMessage" class="alert alert-success mt-3">
+    {{ successMessage }}
+  </div>
+  <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+    {{ errorMessage }}
+  </div>
+  <div *ngIf="warningMessage" class="alert alert-warning">
+  {{ warningMessage }}
+</div>
+
+
+  <!-- Booking Selection -->
+  <div class="mb-3">
+    <label for="bookingSelect" class="form-label fw-bold">Select Booking</label>
+    <select id="bookingSelect"
+            class="form-select"
+            name="bookingId"
+            [(ngModel)]="request.bookingId"
+            (change)="onBookingChange()"
+            required>
+      <option [ngValue]="0" disabled>Select Booking</option>
+      <option *ngFor="let booking of bookings" [ngValue]="booking.bookingId">
+        Booking #{{ booking.bookingId }} | ₹{{ booking.totalAmount }} | Route {{ booking.routeId }}
+      </option>
+    </select>
+  </div>
+
+  <!-- Payment ID Auto-filled -->
+  <div class="mb-3">
+    <label for="paymentId" class="form-label fw-bold">Payment ID (Auto-filled)</label>
+    <input type="text"
+           id="paymentId"
+           class="form-control"
+           [value]="request.paymentId || 'N/A'"
+           disabled />
+  </div>
+
+  <!-- Seat Selection -->
+  <div class="mb-3">
+    <label class="form-label fw-bold">Select Seats to Cancel</label>
+    <div *ngIf="seatSelectionList.length > 0; else noSeatsBlock">
+      <div *ngFor="let seat of seatSelectionList" class="form-check">
+        <input type="checkbox"
+               class="form-check-input"
+               [checked]="seat.selected"
+               (change)="toggleSeatSelection(seat.seatId)"
+               id="seat-{{ seat.seatId }}" />
+        <label class="form-check-label" [for]="'seat-' + seat.seatId">
+          Seat {{ seat.seatNumber }}
+        </label>
+      </div>
+    </div>
+    <ng-template #noSeatsBlock>
+      <div class="text-danger">❌ No seats available for this booking.</div>
+    </ng-template>
+  </div>
+
+  <!-- Reason -->
+  <div class="mb-3">
+    <label for="reason" class="form-label fw-bold">Reason</label>
+    <textarea id="reason"
+              class="form-control"
+              [(ngModel)]="request.reason"
+              name="reason"
+              rows="2"
+              placeholder="Enter reason for cancellation..."
+              required></textarea>
+  </div>
+
+  <!-- Submit Button -->
+  <div class="text-end">
+    <button type="button"
+            class="btn btn-danger"
+            (click)="submit()">Cancel Booking</button>
+  </div>
+</div>

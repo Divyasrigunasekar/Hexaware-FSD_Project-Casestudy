@@ -1,0 +1,51 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top px-4">
+  <a class="navbar-brand" routerLink="/">🚌 FastX</a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-bs-toggle="collapse"
+    data-bs-target="#navbarNav"
+    aria-controls="navbarNav"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ms-auto align-items-center">
+
+      <!-- Scroll to sections on home -->
+      <li class="nav-item">
+        <a class="nav-link" href="#about" title="Who runs this show? 😎">About Us</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#contact" title="Say hi 👋">Contact</a>
+      </li>
+
+      <!-- Dashboards -->
+      <li class="nav-item" *ngIf="isLoggedIn() && role === 'ADMIN'">
+        <a class="nav-link" routerLink="/admin-dashboard">Admin Dashboard</a>
+      </li>
+      <li class="nav-item" *ngIf="isLoggedIn() && role === 'OPERATOR'">
+        <a class="nav-link" routerLink="/operator-dashboard">Operator Dashboard</a>
+      </li>
+      <li class="nav-item" *ngIf="isLoggedIn() && role === 'USER'">
+        <a class="nav-link" routerLink="/user-dashboard">User Dashboard</a>
+      </li>
+
+      <!-- Login/Register -->
+      <li class="nav-item" *ngIf="!isLoggedIn()">
+        <a class="nav-link" routerLink="/login">Login</a>
+      </li>
+      <li class="nav-item" *ngIf="!isLoggedIn()">
+        <a class="nav-link" routerLink="/register">Register</a>
+      </li>
+
+      <!-- Logout -->
+      <li class="nav-item" *ngIf="isLoggedIn()">
+        <a class="nav-link text-danger" href="#" (click)="logout()">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>

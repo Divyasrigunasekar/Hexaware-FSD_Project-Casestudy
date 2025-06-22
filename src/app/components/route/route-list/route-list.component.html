@@ -1,0 +1,71 @@
+<div class="container mt-4">
+  <h3>Route List</h3>
+
+  <!-- Filters -->
+  <div class="row mb-3">
+    <div class="col-md-4 mb-2">
+      <input
+        type="text"
+        [(ngModel)]="searchTerm"
+        (input)="filterRoutes()"
+        placeholder="Search by origin, destination or bus ID"
+        class="form-control"
+      />
+    </div>
+    <div class="col-md-3 mb-6">
+      <select class="form-select" [(ngModel)]="selectedOrigin" (change)="filterRoutes()">
+        <option value="">All Origins</option>
+        <option *ngFor="let origin of origins" [value]="origin">{{ origin }}</option>
+      </select>
+    </div>
+    <div class="col-md-3 mb-6">
+      <select class="form-select" [(ngModel)]="selectedDestination" (change)="filterRoutes()">
+        <option value="">All Destinations</option>
+        <option *ngFor="let dest of destinations" [value]="dest">{{ dest }}</option>
+      </select>
+    </div>
+    <div class="col-md-2 mb-2">
+      <button class="btn btn-outline-secondary w-100" (click)="clearFilters()">Clear Filters</button>
+    </div>
+  </div>
+
+  <!-- Route Table -->
+  <table class="table table-striped table-bordered" *ngIf="filteredRoutes.length > 0; else noRoutes">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Bus ID</th>
+        <th>Origin</th>
+        <th>Destination</th>
+        <th>Departure</th>
+        <th>Arrival</th>
+        <th>Fare (₹)</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let route of filteredRoutes">
+        <td>{{ route.routeId }}</td>
+        <td>{{ route.busId || 'Not Assigned' }}</td>
+        <td>{{ route.origin }}</td>
+        <td>{{ route.destination }}</td>
+        <td>{{ route.departureTime | date: 'MMM d, y, h:mm a' }}</td>
+        <td>{{ route.arrivalTime | date: 'MMM d, y, h:mm a' }}</td>
+        <td>{{ route.fare | currency: 'INR':'symbol':'1.0-0' }}</td>
+        <td>
+          <div class="btn-group">
+            <button class="btn btn-sm btn-primary" (click)="editRoute(route.routeId!)">Edit</button>
+            <button class="btn btn-sm btn-danger" (click)="deleteRoute(route.routeId!)">Delete</button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- No Routes Template -->
+  <ng-template #noRoutes>
+    <div class="alert alert-info">No routes found.</div>
+  </ng-template>
+
+  
+</div>

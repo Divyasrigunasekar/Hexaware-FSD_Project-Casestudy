@@ -1,0 +1,68 @@
+<div class="container mt-5 d-flex justify-content-center">
+  <div class="card p-4 shadow-sm rounded-4" style="max-width: 600px; width: 100%;">
+    <h3 class="text-center text-primary mb-4">Edit User</h3>
+
+    <form (ngSubmit)="updateUser()" #userForm="ngForm">
+      
+      <!-- Name -->
+      <div class="form-floating mb-3">
+        <input type="text" id="name" name="name" class="form-control" [(ngModel)]="user.name"
+          required minlength="4" placeholder="Full Name" />
+        <label for="name">Full Name</label>
+      </div>
+
+      <!-- Email -->
+      <div class="form-floating mb-3">
+        <input type="email" id="email" name="email" class="form-control" [(ngModel)]="user.email"
+          required placeholder="Email" />
+        <label for="email">Email</label>
+      </div>
+
+      <!-- Password -->
+      <div class="form-floating mb-3">
+        <input type="password" id="password" name="password" class="form-control"
+          [(ngModel)]="user.password" placeholder="Password (optional)" />
+        <label for="password">Password (leave blank to keep current)</label>
+      </div>
+
+      <!-- Gender -->
+      <div class="form-floating mb-3">
+        <select id="gender" name="gender" class="form-select" [(ngModel)]="user.gender" required>
+          <option value="" disabled>Select Gender</option>
+          <option value="FEMALE">Female</option>
+          <option value="MALE">Male</option>
+          <option value="OTHER">Other</option>
+        </select>
+        <label for="gender">Gender</label>
+      </div>
+
+      <!-- Contact Number -->
+      <div class="form-floating mb-3">
+        <input type="text" id="contactNumber" name="contactNumber" class="form-control"
+          [(ngModel)]="user.contactNumber" pattern="^[0-9]{10}$" required placeholder="Contact Number" />
+        <label for="contactNumber">Contact Number</label>
+      </div>
+
+      <!-- Role -->
+      <div class="form-floating mb-3">
+        <select id="role" name="role" class="form-select" [(ngModel)]="user.role" required>
+          <option value="" disabled>Select Role</option>
+          <option value="ADMIN">Admin</option>
+          <option value="USER">User</option>
+          <option value="OPERATOR">Operator</option>
+        </select>
+        <label for="role">Role</label>
+      </div>
+
+      <!-- Buttons -->
+      <div class="d-flex justify-content-between mt-4">
+        <button type="submit" class="btn btn-success px-4" [disabled]="userForm.invalid">Update</button>
+        <a class="btn btn-outline-secondary" routerLink="/users/list">Cancel</a>
+      </div>
+
+      <!-- Alert Messages -->
+      <div *ngIf="successMessage" class="alert alert-success mt-3">{{ successMessage }}</div>
+      <div *ngIf="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</div>
+    </form>
+  </div>
+</div>

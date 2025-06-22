@@ -1,0 +1,19 @@
+.hover-effect:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+.hover-card:hover {
+  background-color: #f8f9fa;
+  transform: translateY(-5px);
+  transition: all 0.3s ease-in-out;
+}
+
+footer {
+  padding-top: 20px;
+  border-top: 1px solid #ddd;
+}
+
+html {
+  scroll-behavior: smooth;
+}

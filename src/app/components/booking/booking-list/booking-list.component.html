@@ -1,0 +1,70 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>All Bookings</h2>
+    <a class="btn btn-primary" routerLink="/booking-add">+ Add New Booking</a>
+  </div>
+
+  <!--  Live Search Box -->
+  <div class="mb-3">
+    <div class="col-md-6 mb-6">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Search by Booking ID, Route ID, User ID, Status, or Seat Number"
+      [(ngModel)]="searchTerm"
+      (input)="filterBookings()" />
+      </div>
+  </div>
+
+  <table class="table table-bordered table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>User ID</th>
+        <th>Route ID</th>
+        <th>Seat Number</th>
+        <th>Seats Booked</th>
+        <th>Total (₹)</th>
+        <th>Status</th>
+        <th>Booking Time</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let booking of filteredBookings" [ngClass]="{'table-danger': booking.status === 'CANCELLED'}">
+        <td>{{ booking.bookingId }}</td>
+        <td>{{ booking.userId }}</td>
+        <td>{{ booking.routeId }}</td>
+        <td>{{ formatSeats(booking.seatNumbers) }}</td>
+        <td>{{ booking.seatsBooked }}</td>
+        <td>{{ booking.totalAmount | currency:'INR':'symbol' }}</td>
+        <td>{{ booking.status }}</td>
+        <td>{{ booking.bookingTime | date:'short' }}</td>
+        <td class="d-flex flex-wrap gap-1">
+          <a
+            class="btn btn-sm btn-warning"
+            [routerLink]="['/booking-edit', booking.bookingId]"
+            [class.disabled]="booking.status === 'CANCELLED'">
+            Edit
+          </a>
+          <a
+  class="btn btn-sm btn-secondary"
+  [routerLink]="['/cancellation-add']"
+  [queryParams]="{
+    bookingId: booking.bookingId,
+    paymentId: booking.paymentId,
+    seatIds: booking.seatNumbers
+  }"
+  [class.disabled]="booking.status === 'CANCELLED'">
+  Cancel
+</a>
+          <button
+            class="btn btn-sm btn-danger"
+            (click)="deleteBooking(booking.bookingId!)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

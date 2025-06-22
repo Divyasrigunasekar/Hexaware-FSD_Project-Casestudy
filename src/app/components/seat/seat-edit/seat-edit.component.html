@@ -1,0 +1,70 @@
+<div class="container mt-4">
+  <h3>Edit Seat</h3>
+
+  <form #form="ngForm" (ngSubmit)="onUpdate(form)">
+    <div class="mb-3">
+      <label>Route ID</label>
+      <input
+        type="number"
+        class="form-control"
+        name="routeId"
+        [(ngModel)]="seat.routeId"
+        required
+        min="1"
+        #routeId="ngModel"
+      />
+      <div class="text-danger" *ngIf="routeId.invalid && routeId.touched">
+        Valid Route ID is required
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label>Bus ID</label>
+      <input
+        type="number"
+        class="form-control"
+        name="busId"
+        [(ngModel)]="seat.busId"
+        required
+        min="1"
+        #busId="ngModel"
+      />
+      <div class="text-danger" *ngIf="busId.invalid && busId.touched">
+        Valid Bus ID is required
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label>Seat Number</label>
+      <input
+        type="text"
+        class="form-control"
+        name="seatNumber"
+        [(ngModel)]="seat.seatNumber"
+        required
+        maxlength="10"
+        #seatNumber="ngModel"
+      />
+      <div class="text-danger" *ngIf="seatNumber.invalid && seatNumber.touched">
+        Seat number is required (max 10 characters)
+      </div>
+    </div>
+
+    <div class="form-check mb-3">
+      <input
+        type="checkbox"
+        class="form-check-input"
+        [(ngModel)]="seat.isBooked"
+        name="isbooked"
+        id="bookedCheck"
+      />
+      <label class="form-check-label" for="bookedCheck">Is Booked</label>
+    </div>
+
+    <button class="btn btn-success" type="submit" [disabled]="form.invalid">
+      Update Seat
+    </button>
+    <button class="btn btn-secondary ms-2" routerLink="/seat-list">Cancel</button>
+  </form>
+</div>
+

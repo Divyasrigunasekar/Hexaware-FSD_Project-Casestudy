@@ -1,0 +1,36 @@
+<div class="container mt-4">
+  <h3>Update Bus Details</h3>
+
+  <form #form="ngForm" (ngSubmit)="onUpdate(form)">
+    <div class="mb-3">
+      <label>Bus Name</label>
+      <input type="text" class="form-control" [(ngModel)]="bus.busName" name="busName" required minlength="3" maxlength="100" #busName="ngModel">
+      <div class="text-danger" *ngIf="busName.invalid && busName.touched">Name is required (3-100 chars)</div>
+    </div>
+
+    <div class="mb-3">
+      <label>Bus Number</label>
+      <input type="text" class="form-control" [(ngModel)]="bus.busNumber" name="busNumber" required maxlength="50" #busNumber="ngModel">
+      <div class="text-danger" *ngIf="busNumber.invalid && busNumber.touched">Bus Number required (max 50 chars)</div>
+    </div>
+
+    <div class="mb-3">
+      <label>Bus Type</label>
+      <input type="text" class="form-control" [(ngModel)]="bus.busType" name="busType" required maxlength="50" #busType="ngModel">
+      <div class="text-danger" *ngIf="busType.invalid && busType.touched">Type is required (max 50 chars)</div>
+    </div>
+
+    <div class="mb-3">
+      <label>Total Seats</label>
+      <input type="number" class="form-control" [(ngModel)]="bus.totalSeats" name="totalSeats" required min="1" #totalSeats="ngModel">
+      <div class="text-danger" *ngIf="totalSeats.invalid && totalSeats.touched">Enter valid seat count</div>
+    </div>
+
+    <div class="mb-3">
+      <label>Amenities</label>
+      <textarea class="form-control" [(ngModel)]="bus.amenities" name="amenities" maxlength="255"></textarea>
+    </div>
+
+    <button class="btn btn-success" type="submit" [disabled]="form.invalid">Update Bus</button>
+  </form>
+</div>
